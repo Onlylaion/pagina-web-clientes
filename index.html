@@ -251,6 +251,12 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#818CF8 0%,#38
 .role-item.off svg{color:var(--dim)}
 .role-sep{height:1px;background:var(--border);margin:.4rem .7rem}
 
+/* SOL EXTRAS */
+.sol-extras{margin-top:1.2rem;background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.15);border-radius:12px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.sol-extras-label{font-size:.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:.2rem}
+.sol-extra-item{display:flex;align-items:center;gap:.55rem;font-size:.83rem;color:var(--muted)}
+.sol-extra-item svg{color:var(--accent);flex-shrink:0}
+
 /* CIERRE CSS in pair (inherits .pair rules) */
 .caja-mock{background:var(--s2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
 .caja-head{background:var(--s3);padding:.75rem 1.1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
@@ -640,7 +646,21 @@ footer p{font-size:.78rem;color:var(--dim)}
           Cómo lo resolvemos
         </div>
         <p class="pair-sol-copy">AlfaSoft registra cada venta con su medio de pago. Al cierre del día el sistema muestra <strong>el desglose por efectivo, transferencias y tarjetas</strong>, listo para comparar con lo que tenés en caja.</p>
-        <p class="pair-sol-copy" style="margin-top:.9rem">Además, los <strong>reportes mensuales</strong> te dan una visión completa para tomar mejores decisiones: qué períodos vendés más, cómo evoluciona tu facturación y qué productos tienen más rotación.</p>
+        <div class="sol-extras">
+          <span class="sol-extras-label">Reportes mensuales incluidos</span>
+          <div class="sol-extra-item">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Qué períodos vendés más
+          </div>
+          <div class="sol-extra-item">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Cómo evoluciona tu facturación
+          </div>
+          <div class="sol-extra-item">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Qué productos tienen más rotación
+          </div>
+        </div>
       </div>
       <div class="pair-vis">
         <div class="caja-mock">
