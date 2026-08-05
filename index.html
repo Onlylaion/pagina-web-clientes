@@ -225,6 +225,47 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#818CF8 0%,#38
 .wa-btn{width:100%;padding:.72rem;border-radius:8px;background:var(--green);color:#fff;
   font-weight:700;font-size:.88rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.45rem}
 
+/* ROLES */
+.roles-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:4rem}
+@media(max-width:640px){.roles-wrap{grid-template-columns:1fr}}
+.role-panel{background:var(--s2);border:1px solid var(--border2);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.role-panel.owner{border-top:2px solid var(--indigo)}
+.role-panel.employee{border-top:2px solid rgba(129,140,248,.35)}
+.role-header{background:var(--s3);padding:.9rem 1.3rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid var(--border)}
+.role-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;flex-shrink:0}
+.role-av.ow{background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff}
+.role-av.em{background:rgba(129,140,248,.15);color:var(--accent)}
+.role-info strong{display:block;font-size:.8rem;font-weight:700}
+.role-info span{font-size:.68rem;color:var(--muted)}
+.role-badge{margin-left:auto;font-size:.62rem;font-weight:800;letter-spacing:.8px;padding:.18rem .55rem;border-radius:999px}
+.role-badge.full{background:rgba(79,70,229,.18);color:#a5b4fc}
+.role-badge.lim{background:rgba(255,255,255,.06);color:var(--dim)}
+.role-body{padding:.8rem}
+.role-item{display:flex;align-items:center;gap:.7rem;padding:.6rem .7rem;border-radius:8px;margin-bottom:.25rem;transition:background .2s}
+.role-item:hover{background:rgba(255,255,255,.04)}
+.role-item svg{flex-shrink:0}
+.role-item-txt{font-size:.8rem;font-weight:600}
+.role-item.on .role-item-txt{color:var(--text)}
+.role-item.on svg{color:var(--accent)}
+.role-item.off .role-item-txt{color:var(--dim)}
+.role-item.off svg{color:var(--dim)}
+.role-sep{height:1px;background:var(--border);margin:.4rem .7rem}
+
+/* CIERRE CSS in pair (inherits .pair rules) */
+.caja-mock{background:var(--s2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.caja-head{background:var(--s3);padding:.75rem 1.1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+.caja-body{padding:1.2rem}
+.caja-row{display:flex;align-items:center;justify-content:space-between;padding:.55rem .8rem;border-radius:8px;margin-bottom:.35rem;background:rgba(255,255,255,.025)}
+.caja-label{display:flex;align-items:center;gap:.55rem;font-size:.8rem;color:var(--muted)}
+.caja-label svg{opacity:.7}
+.caja-val{font-size:.82rem;font-weight:700;color:var(--text)}
+.caja-total{margin-top:.8rem;background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.2);border-radius:10px;
+  padding:.85rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.caja-total-label{font-size:.8rem;font-weight:700;color:#a5b4fc}
+.caja-total-val{font-size:1rem;font-weight:900;color:var(--accent)}
+.caja-ok{margin-top:.6rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15);
+  border-radius:8px;padding:.55rem .9rem;display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:#4ADE80}
+
 /* ADAPTA */
 .rubro-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.5rem;margin-bottom:3rem}
 .rubro-tag{display:flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:999px;
@@ -585,6 +626,152 @@ footer p{font-size:.78rem;color:var(--dim)}
           </div>
         </div>
       </div>
+    <!-- PAR 4: CIERRE DE CAJA -->
+    <div class="pair rev" id="p4">
+      <div class="pair-text">
+        <div class="pair-tag prob">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          El problema
+        </div>
+        <h3>Llega el final del día y todavía tenés que cuadrar la caja a mano.</h3>
+        <p class="pair-prob-copy">Revisar tickets, sumar efectivo, separar transferencias y tarjetas... cualquier diferencia implica volver a revisar todo desde el principio. Es tiempo que perdés todos los días.</p>
+        <div class="pair-tag sol" style="margin-top:1.5rem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Cómo lo resolvemos
+        </div>
+        <p class="pair-sol-copy">AlfaSoft registra cada venta con su medio de pago. Al cierre del día, el sistema muestra <strong>el total por efectivo, transferencias y tarjetas</strong> — listo para comparar con lo que tenés en caja. Y los reportes mensuales te dan una visión completa para tomar decisiones estratégicas: qué períodos vendés más, cómo evoluciona tu facturación y qué stock tiene más rotación.</p>
+      </div>
+      <div class="pair-vis">
+        <div class="caja-mock">
+          <div class="caja-head">
+            <div class="app-dots"><div class="app-dot" style="background:#EF4444"></div><div class="app-dot" style="background:#FBBF24"></div><div class="app-dot" style="background:#4ADE80"></div></div>
+            <span class="stock-mock-title">Cierre de caja — Hoy</span>
+          </div>
+          <div class="caja-body">
+            <div class="caja-row">
+              <span class="caja-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12a2 2 0 100-4 2 2 0 000 4z"/><path d="M6 12h.01M18 12h.01"/></svg>
+                Efectivo
+              </span>
+              <span class="caja-val">$42.000</span>
+            </div>
+            <div class="caja-row">
+              <span class="caja-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Transferencias
+              </span>
+              <span class="caja-val">$29.500</span>
+            </div>
+            <div class="caja-row">
+              <span class="caja-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Tarjeta
+              </span>
+              <span class="caja-val">$16.000</span>
+            </div>
+            <div class="caja-total">
+              <span class="caja-total-label">Total del día</span>
+              <span class="caja-total-val">$87.500</span>
+            </div>
+            <div class="caja-ok">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Caja cuadrada — diferencia: $0
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section class="s alt">
+  <div class="s-inner">
+    <span class="eyebrow" id="ey-rol">Control de acceso</span>
+    <h2 class="s-title" id="st-rol">Cada persona ve lo que necesita.<br/>Nada más, nada menos.</h2>
+    <p class="s-sub" id="ss-rol">No todos en tu negocio cumplen el mismo rol, por eso tampoco deberían ver lo mismo. AlfaSoft tiene permisos por usuario: el dueño accede a todo, los empleados solo a lo que necesitan para trabajar.</p>
+    <div class="roles-wrap" id="roles">
+
+      <div class="role-panel owner">
+        <div class="role-header">
+          <div class="role-av ow">D</div>
+          <div class="role-info"><strong>Dueño del negocio</strong><span>Acceso completo</span></div>
+          <span class="role-badge full">ADMIN</span>
+        </div>
+        <div class="role-body">
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="role-item-txt">Dashboard completo</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span class="role-item-txt">Reportes y estadísticas</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <span class="role-item-txt">Rentabilidad y márgenes</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12a2 2 0 100-4 2 2 0 000 4z"/></svg>
+            <span class="role-item-txt">Cierre de caja</span>
+          </div>
+          <div class="role-sep"></div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+            <span class="role-item-txt">Ventas y pedidos</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18M3 9h18M3 15h18M3 21h18"/></svg>
+            <span class="role-item-txt">Control de stock</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M21 12h-2M5 12H3M12 21v-2M12 5V3"/></svg>
+            <span class="role-item-txt">Configuración del sistema</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="role-panel employee">
+        <div class="role-header">
+          <div class="role-av em">E</div>
+          <div class="role-info"><strong>Empleado</strong><span>Acceso operativo</span></div>
+          <span class="role-badge lim">EMPLEADO</span>
+        </div>
+        <div class="role-body">
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+            <span class="role-item-txt">Crear pedidos</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            <span class="role-item-txt">Registrar ventas y cobrar</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18M3 9h18M3 15h18M3 21h18"/></svg>
+            <span class="role-item-txt">Consultar stock</span>
+          </div>
+          <div class="role-item on">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="role-item-txt">Ver agenda de pedidos</span>
+          </div>
+          <div class="role-sep"></div>
+          <div class="role-item off">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span class="role-item-txt">Reportes — sin acceso</span>
+          </div>
+          <div class="role-item off">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <span class="role-item-txt">Rentabilidad — sin acceso</span>
+          </div>
+          <div class="role-item off">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M21 12h-2M5 12H3M12 21v-2M12 5V3"/></svg>
+            <span class="role-item-txt">Configuración — sin acceso</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -936,6 +1123,20 @@ inView('#wc1', () => {
   animate('#wc1', { opacity:[0,1], y:[20,0] }, { duration:.5, easing:ease })
   animate('#wc2', { opacity:[0,1], y:[20,0] }, { delay:.13, duration:.5, easing:ease })
 }, { margin:'0px 0px -40px 0px' })
+
+// Pair 4 — cierre de caja
+inView('#p4', () => {
+  animate('#p4 .pair-text', { opacity:[0,1], x:[28,0]  }, { duration:.65, easing:ease })
+  animate('#p4 .pair-vis',  { opacity:[0,1], x:[-28,0] }, { duration:.65, delay:.1, easing:ease })
+}, { margin:'0px 0px -60px 0px' })
+
+// Roles section
+inView('#ey-rol', () => animate('#ey-rol', { opacity:[0,1], y:[10,0] }, { duration:.5, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#st-rol', () => animate('#st-rol', { opacity:[0,1], y:[24,0] }, { duration:.6, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#ss-rol', () => animate('#ss-rol', { opacity:[0,1], y:[16,0] }, { duration:.5, delay:.1, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#roles', () => {
+  animate('.role-panel', { opacity:[0,1], y:[28,0] }, { delay: stagger(.15), duration:.6, easing:ease })
+}, { margin:'0px 0px -60px 0px' })
 
 // Adaptamos section
 inView('#ey-ada', () => animate('#ey-ada', { opacity:[0,1], y:[10,0] }, { duration:.5, easing:ease }), { margin:'0px 0px -40px 0px' })
