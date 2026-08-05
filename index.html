@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AlfaSoft — Software que hace crecer tu negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04040D;--s1:#08081A;--s2:#0E0E24;
+  --border:rgba(255,255,255,0.07);
+  --text:#EEEEFF;--muted:#7B7A9A;--muted2:#5A5980;
+  --indigo:#4F46E5;--violet:#7C3AED;--cyan:#06B6D4;--green:#25D366;
+  --accent:#818CF8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* ─── PROGRESS ─── */
+#bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--indigo),var(--cyan));
+  transform-origin:left;transform:scaleX(0);will-change:transform}
+
+/* ─── NAV ─── */
+nav{position:fixed;inset:0 0 auto;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 6%;background:rgba(4,4,13,.75);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border)}
+.logo{font-size:1.3rem;font-weight:900;letter-spacing:-.5px}
+.logo b{background:linear-gradient(90deg,#818CF8,#38BDF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.nav-btn{display:flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;
+  padding:.6rem 1.3rem;border-radius:8px;font-weight:700;font-size:.85rem;
+  text-decoration:none;transition:opacity .2s}
+.nav-btn:hover{opacity:.88}
+.nav-btn svg{flex-shrink:0}
+
+/* ─── HERO ─── */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:9rem 6% 5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5}
+.hero-orb-1{width:700px;height:500px;background:radial-gradient(circle,rgba(79,70,229,.35),transparent 70%);
+  top:-10%;left:50%;transform:translateX(-50%)}
+.hero-orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,.2),transparent 70%);
+  bottom:5%;right:10%}
+.grid-bg{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 60% at 50% 40%,black,transparent)}
+
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:2rem;
+  background:rgba(79,70,229,.12);border:1px solid rgba(129,140,248,.25);
+  padding:.4rem 1rem;border-radius:999px;font-size:.75rem;font-weight:600;color:#a5b4fc;letter-spacing:.5px}
+.tag-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:900;letter-spacing:-2.5px;
+  line-height:1.05;max-width:860px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,#818CF8 0%,#38BDF8 50%,#A78BFA 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{margin-top:1.6rem;font-size:1.1rem;color:var(--muted);max-width:600px;line-height:1.8}
+.hero-ctas{display:flex;gap:1rem;margin-top:2.8rem;flex-wrap:wrap;justify-content:center}
+.btn-green{display:flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;
+  padding:.9rem 1.8rem;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;
+  box-shadow:0 0 40px rgba(37,211,102,.3);transition:transform .2s,box-shadow .2s}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(37,211,102,.45)}
+.btn-ghost{display:flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);
+  padding:.9rem 1.8rem;border-radius:10px;font-weight:600;font-size:1rem;text-decoration:none;
+  border:1px solid var(--border);transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:rgba(129,140,248,.4);background:rgba(79,70,229,.06)}
+.hero-note{margin-top:1.2rem;font-size:.78rem;color:var(--muted2)}
+
+/* ─── MARQUEE ─── */
+.marquee-section{padding:2rem 0;background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
+.marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite}
+.marquee-track-rev{animation-direction:reverse;margin-top:.6rem}
+.marquee-item{white-space:nowrap;padding:.4rem 2rem;font-size:.8rem;font-weight:600;
+  color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+.marquee-sep{color:var(--indigo);margin:0 .5rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── SECTION HELPERS ─── */
+.section{padding:7rem 6%}
+.section-inner{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+.section-title{font-size:clamp(2rem,3.8vw,3rem);font-weight:900;letter-spacing:-1.5px;line-height:1.1;max-width:720px}
+.section-sub{color:var(--muted);margin-top:1rem;max-width:560px;line-height:1.8;font-size:.98rem}
+.alt-bg{background:var(--s1)}
+
+/* ─── METRICS ─── */
+.metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+@media(max-width:640px){.metrics-grid{grid-template-columns:1fr}}
+.metric-card{background:var(--s2);border:1px solid var(--border);border-radius:16px;
+  padding:2.2rem 2rem;text-align:center;border-top:2px solid var(--indigo)}
+.metric-val{font-size:3rem;font-weight:900;letter-spacing:-2px;
+  background:linear-gradient(120deg,#818CF8,#38BDF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.metric-desc{color:var(--muted);font-size:.88rem;margin-top:.6rem;line-height:1.6}
+
+/* ─── FEATURE PAIRS ─── */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:7rem}
+.pair:last-child{margin-bottom:0}
+.pair.reverse .pair-visual{order:-1}
+@media(max-width:768px){.pair{grid-template-columns:1fr;gap:2.5rem}.pair.reverse .pair-visual{order:0}}
+.pair-problem{display:inline-flex;align-items:center;gap:.5rem;background:rgba(239,68,68,.1);
+  border:1px solid rgba(239,68,68,.2);color:#FCA5A5;padding:.35rem .9rem;
+  border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.2rem}
+.pair-text h3{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:1rem}
+.pair-text .problem-copy{color:var(--muted);font-size:.95rem;line-height:1.75;margin-bottom:1.5rem;
+  padding-left:1rem;border-left:2px solid rgba(239,68,68,.4)}
+.solution-label{display:inline-flex;align-items:center;gap:.5rem;color:#86EFAC;
+  font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:.8rem}
+.solution-label svg{color:#4ADE80}
+.pair-text .solution-copy{color:var(--text);font-size:1rem;line-height:1.75;font-weight:400}
+
+/* MOCKUPS */
+.mockup{background:var(--s2);border:1px solid var(--border);border-radius:16px;padding:1.5rem;
+  box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.mockup-header{display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem}
+.mockup-dot{width:10px;height:10px;border-radius:50%}
+.mockup-title{font-size:.75rem;color:var(--muted);font-weight:600;margin-left:.5rem}
+
+/* Stock mockup */
+.stock-row{display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem .8rem;border-radius:8px;margin-bottom:.5rem;background:rgba(255,255,255,.03)}
+.stock-name{font-size:.82rem;font-weight:600}
+.stock-bar-wrap{flex:1;margin:0 1rem;height:6px;background:rgba(255,255,255,.1);border-radius:3px}
+.stock-bar{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.stock-bar.ok{background:linear-gradient(90deg,#4ADE80,#22D3EE)}
+.stock-bar.warn{background:linear-gradient(90deg,#FBBF24,#F97316)}
+.stock-bar.low{background:linear-gradient(90deg,#EF4444,#DC2626)}
+.stock-qty{font-size:.78rem;color:var(--muted);min-width:40px;text-align:right}
+.stock-alert{margin-top:1rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);
+  border-radius:8px;padding:.7rem 1rem;display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:#FCA5A5}
+
+/* Pedidos mockup */
+.pedido-card{background:rgba(255,255,255,.03);border-radius:10px;padding:.9rem 1rem;margin-bottom:.6rem;
+  display:flex;align-items:center;justify-content:space-between}
+.pedido-info{display:flex;flex-direction:column;gap:.2rem}
+.pedido-name{font-size:.82rem;font-weight:600}
+.pedido-date{font-size:.72rem;color:var(--muted)}
+.pedido-status{font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:999px;letter-spacing:.5px}
+.status-pend{background:rgba(251,191,36,.12);color:#FCD34D}
+.status-prep{background:rgba(79,70,229,.12);color:#818CF8}
+.status-ret{background:rgba(74,222,128,.12);color:#4ADE80}
+.pedido-saldo{font-size:.75rem;color:#FBBF24;margin-top:.15rem}
+
+/* Grafico mockup */
+.chart-wrap{padding:.5rem 0}
+.chart-bar-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
+.chart-label{font-size:.73rem;color:var(--muted);width:70px;text-align:right;flex-shrink:0}
+.chart-bar-bg{flex:1;height:22px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
+.chart-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--indigo),var(--cyan));
+  width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.chart-amt{font-size:.73rem;color:var(--accent);min-width:55px;font-weight:600}
+
+/* ─── CASO REAL ─── */
+.case-box{background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(6,182,212,.06));
+  border:1px solid rgba(79,70,229,.2);border-radius:20px;padding:3rem;margin-top:3rem}
+.case-story{color:var(--muted);line-height:1.85;font-size:1rem;max-width:680px;margin-bottom:2rem}
+.case-results{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem}
+@media(max-width:640px){.case-results{grid-template-columns:1fr}}
+.case-result{background:rgba(255,255,255,.04);border-radius:12px;padding:1.4rem;border:1px solid var(--border)}
+.case-result-val{font-size:1.6rem;font-weight:900;color:var(--accent);margin-bottom:.3rem}
+.case-result-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
+.case-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.2);
+  padding:.35rem .8rem;border-radius:6px;font-size:.75rem;font-weight:600;color:#a5b4fc}
+
+/* ─── STEPS ─── */
+.steps-wrap{display:flex;flex-direction:column;gap:0;margin-top:3.5rem;max-width:680px}
+.step-item{display:flex;gap:1.5rem;padding:1.8rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.step-item:last-child{border-bottom:none}
+.step-num{min-width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--indigo),var(--violet));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:.9rem;flex-shrink:0}
+.step-body h4{font-weight:700;font-size:1.05rem;margin-bottom:.4rem}
+.step-body p{color:var(--muted);font-size:.9rem;line-height:1.7}
+
+/* ─── TRUST ─── */
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+@media(max-width:640px){.trust-grid{grid-template-columns:1fr}}
+.trust-card{background:var(--s2);border:1px solid var(--border);border-radius:16px;padding:2rem}
+.trust-icon{width:44px;height:44px;border-radius:10px;background:rgba(79,70,229,.15);
+  display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1.2rem}
+.trust-card h4{font-weight:700;font-size:1rem;margin-bottom:.5rem}
+.trust-card p{color:var(--muted);font-size:.88rem;line-height:1.65}
+
+/* ─── CTA FINAL ─── */
+.cta-section{padding:7rem 6%;background:linear-gradient(135deg,rgba(79,70,229,.15) 0%,rgba(124,58,237,.1) 50%,rgba(6,182,212,.08) 100%);
+  border-top:1px solid rgba(79,70,229,.2);border-bottom:1px solid rgba(79,70,229,.2)}
+.cta-inner{max-width:760px;margin:0 auto;text-align:center}
+.cta-inner h2{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:1.2rem}
+.cta-sub{color:var(--muted);font-size:1.05rem;line-height:1.8;margin-bottom:3.5rem}
+.wa-cards{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
+.wa-card{flex:1;min-width:240px;max-width:300px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);border-radius:16px;padding:2rem;text-decoration:none;color:var(--text);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  transition:border-color .3s,transform .25s,box-shadow .25s}
+.wa-card:hover{border-color:var(--green);transform:translateY(-5px);box-shadow:0 20px 60px rgba(37,211,102,.1)}
+.wa-av{width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--indigo),var(--violet));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;font-weight:900;margin-bottom:.4rem}
+.wa-name{font-weight:700;font-size:1.05rem}
+.wa-role{font-size:.78rem;color:var(--muted)}
+.wa-num{font-size:.85rem;color:var(--accent);margin-bottom:.6rem}
+.wa-btn-inner{width:100%;padding:.75rem;border-radius:8px;background:var(--green);
+  color:#fff;font-weight:700;font-size:.9rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.5rem}
+
+/* ─── FOOTER ─── */
+footer{padding:2.5rem 6%;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-size:1.1rem;font-weight:900}
+.footer-logo b{background:linear-gradient(90deg,#818CF8,#38BDF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+footer p{font-size:.8rem;color:var(--muted2)}
+
+/* ─── REVEAL STATES — JS sets initial opacity, CSS is just a marker ─── */
+.will-reveal,.will-slide-left,.will-slide-right,.will-slide-up,.will-scale{}
+
+@media(max-width:600px){
+  .hero h1{letter-spacing:-1.5px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+}
+
+/* WA SVG icon */
+.wa-icon-svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Alfa<b>Soft</b></div>
+  <a href="#contacto" class="nav-btn">
+    <svg class="wa-icon-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Hablar con un asesor
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="grid-bg"></div>
+  </div>
+  <div class="hero-tag" id="htag"><span class="tag-dot"></span>Software a medida · Argentina</div>
+  <h1 id="hh1">¿Tu negocio pierde dinero<br/><em>sin que lo notes?</em></h1>
+  <p class="hero-sub" id="hsub">Cada venta mal registrada, cada stock sin actualizar y cada pedido sin seguimiento te cuesta. AlfaSoft convierte ese caos en un negocio que funciona.</p>
+  <div class="hero-ctas" id="hctas">
+    <a href="https://wa.me/541160284968?text=Hola!%20Vi%20su%20página%20y%20me%20interesa%20un%20sistema%20para%20mi%20negocio" target="_blank" class="btn-green">
+      <svg class="wa-icon-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Quiero organizar mi negocio
+    </a>
+    <a href="#problema" class="btn-ghost">Ver cómo funciona ↓</a>
+  </div>
+  <p class="hero-note" id="hnote">Sin compromiso · Respondemos el mismo día</p>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Stock desactualizado<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pedidos sin seguimiento<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pagos sin registrar<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Horas perdidas en planillas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Decisiones sin datos<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Errores humanos<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Clientes esperando<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sin control de ventas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Stock desactualizado<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pedidos sin seguimiento<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pagos sin registrar<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Horas perdidas en planillas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Decisiones sin datos<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Errores humanos<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Clientes esperando<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sin control de ventas<span class="marquee-sep">·</span></span>
+  </div>
+  <div class="marquee-track marquee-track-rev">
+    <span class="marquee-item">Reportes inexistentes<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Señas olvidadas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Ventas perdidas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sin visibilidad real<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Compras mal calculadas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Proveedores sin respuesta<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Información dispersa<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Caos operativo<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Reportes inexistentes<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Señas olvidadas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Ventas perdidas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sin visibilidad real<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Compras mal calculadas<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Proveedores sin respuesta<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Información dispersa<span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Caos operativo<span class="marquee-sep">·</span></span>
+  </div>
+</div>
+
+<!-- METRICS -->
+<section class="section" id="problema">
+  <div class="section-inner">
+    <div class="eyebrow will-reveal">El costo del desorden</div>
+    <h2 class="section-title will-slide-up">Cada minuto de caos operativo tiene un precio.</h2>
+    <p class="section-sub will-slide-up">Los negocios que gestionan inventario, pedidos y pagos manualmente dejan escapar oportunidades todos los días. No es mala suerte. Es falta de sistema.</p>
+    <div class="metrics-grid" id="metrics">
+      <div class="metric-card will-scale">
+        <div class="metric-val"><span data-count="23" data-suffix="%">23%</span></div>
+        <div class="metric-desc">de las ventas potenciales se pierden por errores de gestión que se pueden evitar</div>
+      </div>
+      <div class="metric-card will-scale">
+        <div class="metric-val"><span data-count="4" data-suffix=" hs">4 hs</span></div>
+        <div class="metric-desc">diarias se pierden en tareas manuales que un sistema puede hacer automáticamente</div>
+      </div>
+      <div class="metric-card will-scale">
+        <div class="metric-val"><span data-count="67" data-suffix="%">67%</span></div>
+        <div class="metric-desc">de los dueños de negocio no saben con exactitud cuánto ganaron el mes anterior</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE PAIRS -->
+<section class="section alt-bg">
+  <div class="section-inner">
+    <div class="eyebrow will-reveal">Cómo lo resolvemos</div>
+    <h2 class="section-title will-slide-up" style="margin-bottom:5rem">Problemas reales.<br/>Soluciones concretas.</h2>
+
+    <!-- PAR 1: STOCK -->
+    <div class="pair" id="pair1">
+      <div class="pair-text will-slide-left">
+        <div class="pair-problem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          El problema
+        </div>
+        <h3>¿Descubrís que un producto se agotó cuando el cliente ya está esperando?</h3>
+        <p class="problem-copy">Llamadas incómodas, ventas perdidas y clientes que no vuelven. El stock manual siempre llega tarde.</p>
+        <div class="solution-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          La solución
+        </div>
+        <p class="solution-copy">AlfaSoft monitorea el inventario en tiempo real. Te avisamos antes de que se agote, con alertas automáticas configuradas según tu negocio. Vendés con confianza porque sabés exactamente con qué contás.</p>
+      </div>
+      <div class="pair-visual will-slide-right">
+        <div class="mockup">
+          <div class="mockup-header">
+            <div class="mockup-dot" style="background:#EF4444"></div>
+            <div class="mockup-dot" style="background:#FBBF24"></div>
+            <div class="mockup-dot" style="background:#4ADE80"></div>
+            <span class="mockup-title">Control de Stock</span>
+          </div>
+          <div class="stock-row">
+            <span class="stock-name">Rosas rojas</span>
+            <div class="stock-bar-wrap"><div class="stock-bar ok" style="width:78%" data-w="78%"></div></div>
+            <span class="stock-qty">78 u.</span>
+          </div>
+          <div class="stock-row">
+            <span class="stock-name">Girasoles</span>
+            <div class="stock-bar-wrap"><div class="stock-bar warn" style="width:32%" data-w="32%"></div></div>
+            <span class="stock-qty">12 u.</span>
+          </div>
+          <div class="stock-row">
+            <span class="stock-name">Liliums blancos</span>
+            <div class="stock-bar-wrap"><div class="stock-bar low" style="width:8%" data-w="8%"></div></div>
+            <span class="stock-qty">3 u.</span>
+          </div>
+          <div class="stock-row">
+            <span class="stock-name">Orquídeas</span>
+            <div class="stock-bar-wrap"><div class="stock-bar ok" style="width:65%" data-w="65%"></div></div>
+            <span class="stock-qty">24 u.</span>
+          </div>
+          <div class="stock-alert">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+            Liliums por debajo del mínimo · Avisá a tu proveedor
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAR 2: PEDIDOS -->
+    <div class="pair reverse" id="pair2">
+      <div class="pair-text will-slide-right">
+        <div class="pair-problem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          El problema
+        </div>
+        <h3>¿Cuántos pedidos tienen una seña cobrada que ya olvidaste?</h3>
+        <p class="problem-copy">Un pedido sin seguimiento es ganancia que se escapa. Sin un control real de pagos, señas y saldos, no podés saber cuánto dinero estás dejando sobre la mesa — ni cómo hacer crecer tu negocio.</p>
+        <div class="solution-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          La solución
+        </div>
+        <p class="solution-copy">Cada pedido tiene estado, fecha de entrega y saldo pendiente. Sabés quién te debe y cuánto, en todo momento, desde el celular. Las señas se registran al instante y el saldo se calcula solo.</p>
+      </div>
+      <div class="pair-visual will-slide-left">
+        <div class="mockup">
+          <div class="mockup-header">
+            <div class="mockup-dot" style="background:#EF4444"></div>
+            <div class="mockup-dot" style="background:#FBBF24"></div>
+            <div class="mockup-dot" style="background:#4ADE80"></div>
+            <span class="mockup-title">Pedidos del día</span>
+          </div>
+          <div class="pedido-card">
+            <div class="pedido-info">
+              <span class="pedido-name">Arreglo cumpleaños — Lucía M.</span>
+              <span class="pedido-date">Entrega: hoy 17:00 hs</span>
+              <span class="pedido-saldo">Saldo pendiente: $4.500</span>
+            </div>
+            <span class="pedido-status status-prep">PREPARADO</span>
+          </div>
+          <div class="pedido-card">
+            <div class="pedido-info">
+              <span class="pedido-name">Ramo de novia — Valentina R.</span>
+              <span class="pedido-date">Entrega: mañana 10:00 hs</span>
+              <span class="pedido-saldo">Seña: $8.000 · Saldo: $12.000</span>
+            </div>
+            <span class="pedido-status status-pend">PENDIENTE</span>
+          </div>
+          <div class="pedido-card">
+            <div class="pedido-info">
+              <span class="pedido-name">Corona empresa — El Pino SA</span>
+              <span class="pedido-date">Retirado · Pago completo</span>
+            </div>
+            <span class="pedido-status status-ret">RETIRADO</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAR 3: REPORTES -->
+    <div class="pair" id="pair3">
+      <div class="pair-text will-slide-left">
+        <div class="pair-problem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          El problema
+        </div>
+        <h3>¿Tomás decisiones importantes basándote en intuición?</h3>
+        <p class="problem-copy">Sin datos, adivinás. Y adivinar sale caro. No sabés qué productos te convienen más, qué días vendés mejor ni cuánto ganás realmente.</p>
+        <div class="solution-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          La solución
+        </div>
+        <p class="solution-copy">Dashboard en tiempo real con ventas del día, semana y mes. Tus productos más rentables, márgenes reales y tendencias. Tomá decisiones que hacen crecer tu negocio, no que lo desgastan.</p>
+      </div>
+      <div class="pair-visual will-slide-right">
+        <div class="mockup">
+          <div class="mockup-header">
+            <div class="mockup-dot" style="background:#EF4444"></div>
+            <div class="mockup-dot" style="background:#FBBF24"></div>
+            <div class="mockup-dot" style="background:#4ADE80"></div>
+            <span class="mockup-title">Ventas del mes</span>
+          </div>
+          <div class="chart-wrap" id="chart">
+            <div class="chart-bar-row">
+              <span class="chart-label">Rosas</span>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:82%" data-w="82%"></div></div>
+              <span class="chart-amt">$184.000</span>
+            </div>
+            <div class="chart-bar-row">
+              <span class="chart-label">Arreglos</span>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:65%" data-w="65%"></div></div>
+              <span class="chart-amt">$146.000</span>
+            </div>
+            <div class="chart-bar-row">
+              <span class="chart-label">Girasoles</span>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:48%" data-w="48%"></div></div>
+              <span class="chart-amt">$108.000</span>
+            </div>
+            <div class="chart-bar-row">
+              <span class="chart-label">Orquídeas</span>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:35%" data-w="35%"></div></div>
+              <span class="chart-amt">$79.000</span>
+            </div>
+            <div class="chart-bar-row">
+              <span class="chart-label">Liliums</span>
+              <div class="chart-bar-bg"><div class="chart-bar-fill" style="width:22%" data-w="22%"></div></div>
+              <span class="chart-amt">$49.500</span>
+            </div>
+          </div>
+          <div style="margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.78rem">
+            <span style="color:var(--muted)">Total del mes</span>
+            <span style="color:var(--accent);font-weight:700">$566.500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASO REAL -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow will-reveal">Caso real</div>
+    <h2 class="section-title will-slide-up">Así lo hicimos en<br/>Flores Ferrer</h2>
+    <div class="case-box will-scale">
+      <p class="case-story">Una florería que gestionaba más de 30 pedidos semanales con papeles, anotaciones y planillas. Stock perdido, señas olvidadas, empleadas sin información actualizada. El dueño no sabía cuánto había ganado en el mes ni qué flores le convenía comprar más.<br/><br/><strong style="color:var(--text)">Hoy tienen control total:</strong> cada pedido con su estado y fecha de entrega, cada pago registrado, el stock actualizado al instante y un dashboard con las ventas del día — todo desde el celular, en tiempo real.</p>
+      <div class="case-results">
+        <div class="case-result">
+          <div class="case-result-val">Sin papel</div>
+          <div class="case-result-desc">Todo centralizado en un sistema digital, accesible en todo momento</div>
+        </div>
+        <div class="case-result">
+          <div class="case-result-val">100%</div>
+          <div class="case-result-desc">de los pedidos con estado, fechas y pagos registrados en tiempo real</div>
+        </div>
+        <div class="case-result">
+          <div class="case-result-val">Desde el celular</div>
+          <div class="case-result-desc">El dueño y las empleadas acceden desde cualquier dispositivo, en cualquier lugar</div>
+        </div>
+      </div>
+      <div class="case-chips">
+        <span class="chip">Ventas y pedidos</span>
+        <span class="chip">Señas y pagos parciales</span>
+        <span class="chip">Stock automático</span>
+        <span class="chip">Panel dueño y empleadas</span>
+        <span class="chip">Dashboard de rentabilidad</span>
+        <span class="chip">Acceso desde el celular</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="section alt-bg">
+  <div class="section-inner">
+    <div class="eyebrow will-reveal">Cómo trabajamos</div>
+    <h2 class="section-title will-slide-up">Simple, directo<br/>y sin vueltas</h2>
+    <div class="steps-wrap" id="steps">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Nos contás tu negocio por WhatsApp</h4>
+          <p>Una charla de 20 minutos es suficiente. Contanos qué problema querés resolver y cómo trabajás hoy.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Recibís una propuesta con precio cerrado</h4>
+          <p>Antes de empezar sabés exactamente qué vas a recibir y cuánto cuesta. Sin sorpresas, sin letra chica.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Construimos tu sistema a medida</h4>
+          <p>Diseñado para tu flujo de trabajo. Te mostramos avances mientras lo desarrollamos para que estés conforme.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Lo usás desde el día uno con soporte real</h4>
+          <p>Instalación, configuración y capacitación incluida. Cualquier duda, nos escribís y respondemos. No desaparecemos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="section">
+  <div class="section-inner">
+    <div class="eyebrow will-reveal">Por qué elegirnos</div>
+    <h2 class="section-title will-slide-up">Sin contratos trampa.<br/>Sin letras chicas.</h2>
+    <div class="trust-grid" id="trust">
+      <div class="trust-card will-scale">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Precio cerrado desde el principio</h4>
+        <p>Acordamos el costo total antes de empezar. Sin costos adicionales, sin extras no discutidos. Lo que acordamos, eso pagás.</p>
+      </div>
+      <div class="trust-card will-scale">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h4>El sistema es tuyo, sin ataduras</h4>
+        <p>No te atamos a suscripciones ni contratos de permanencia. El software que construimos es tuyo. Punto.</p>
+      </div>
+      <div class="trust-card will-scale">
+        <div class="trust-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h4>Soporte real, no un ticket</h4>
+        <p>Cualquier duda o mejora, nos escribís directo por WhatsApp y respondemos. No hay sistema de tickets ni esperas de 72 horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <div class="eyebrow" style="text-align:center">Empezá hoy</div>
+    <h2 class="will-slide-up">Tu negocio puede<br/>funcionar mejor.</h2>
+    <p class="cta-sub will-slide-up">Contanos en qué rubro estás y qué problema querés resolver. Te respondemos en menos de 24 horas con una propuesta concreta. Sin compromiso.</p>
+    <div class="wa-cards">
+      <a href="https://wa.me/541160284968?text=Hola!%20Vi%20su%20página%20y%20me%20interesa%20un%20sistema%20para%20mi%20negocio" target="_blank" class="wa-card" id="wac1">
+        <div class="wa-av">M</div>
+        <div class="wa-name">Marcos</div>
+        <div class="wa-role">Desarrollo &amp; Soporte</div>
+        <div class="wa-num">+54 11 6028-4968</div>
+        <div class="wa-btn-inner">
+          <svg class="wa-icon-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribir por WhatsApp
+        </div>
+      </a>
+      <a href="https://wa.me/541122875921?text=Hola!%20Vi%20su%20página%20y%20me%20interesa%20un%20sistema%20para%20mi%20negocio" target="_blank" class="wa-card" id="wac2">
+        <div class="wa-av">N</div>
+        <div class="wa-name">Nicolás</div>
+        <div class="wa-role">Desarrollo &amp; Soporte</div>
+        <div class="wa-num">+54 11 2287-5921</div>
+        <div class="wa-btn-inner">
+          <svg class="wa-icon-svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribir por WhatsApp
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Alfa<b>Soft</b></div>
+  <p>Software a medida para pequeñas y medianas empresas · Argentina · 2025</p>
+</footer>
+
+<script type="module">
+import { animate, scroll, inView, stagger, spring } from "https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"
+
+const ease = spring({ stiffness: 220, damping: 26 })
+const easeSnap = spring({ stiffness: 300, damping: 30 })
+
+// ── Scroll progress ──────────────────────────────────────────
+scroll(({ y }) => { animate('#bar', { scaleX: y.progress }, { duration: 0 }) })
+
+// ── Hero sequence ────────────────────────────────────────────
+animate('#htag',  { opacity:[0,1], y:[14,0] }, { delay:.15, duration:.5, easing:ease })
+animate('#hh1',   { opacity:[0,1], y:[40,0] }, { delay:.3,  duration:.7, easing:ease })
+animate('#hsub',  { opacity:[0,1], y:[24,0] }, { delay:.5,  duration:.6, easing:ease })
+animate('#hctas', { opacity:[0,1], y:[18,0] }, { delay:.68, duration:.6, easing:ease })
+animate('#hnote', { opacity:[0,.5]           }, { delay:.88, duration:.5 })
+
+// ── Set initial hidden state via JS (not CSS) ────────────────
+document.querySelectorAll('.will-reveal').forEach(el => { el.style.opacity = '0' })
+document.querySelectorAll('.will-slide-up').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(28px)' })
+document.querySelectorAll('.will-slide-left').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateX(-32px)' })
+document.querySelectorAll('.will-slide-right').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateX(32px)' })
+document.querySelectorAll('.will-scale').forEach(el => { el.style.opacity = '0'; el.style.transform = 'scale(0.93)' })
+
+// ── Generic reveal helpers ───────────────────────────────────
+inView('.will-reveal', ({ target }) => {
+  animate(target, { opacity:[0,1] }, { duration:.6, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+inView('.will-slide-up', ({ target }) => {
+  animate(target, { opacity:[0,1], y:[28,0] }, { duration:.65, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+inView('.will-slide-left', ({ target }) => {
+  animate(target, { opacity:[0,1], x:[-32,0] }, { duration:.65, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+inView('.will-slide-right', ({ target }) => {
+  animate(target, { opacity:[0,1], x:[32,0] }, { duration:.65, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+inView('.will-scale', ({ target }) => {
+  animate(target, { opacity:[0,1], scale:[.93,1] }, { duration:.65, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+// ── Animated counters ────────────────────────────────────────
+inView('#metrics', () => {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseFloat(el.dataset.count)
+    const suffix = el.dataset.suffix || ''
+    animate(0, target, {
+      duration: 1.8,
+      easing: [0.16, 1, 0.3, 1],
+      onUpdate: v => { el.textContent = Math.round(v) + suffix }
+    })
+  })
+}, { amount: .4 })
+
+// ── Stock bars ───────────────────────────────────────────────
+inView('#pair1', () => {
+  document.querySelectorAll('.stock-bar').forEach((bar, i) => {
+    const target = bar.dataset.w
+    bar.style.width = '0'
+    setTimeout(() => {
+      animate(bar, { width: target }, { duration:1.2, easing:[.16,1,.3,1] })
+    }, 200 + i * 130)
+  })
+}, { amount: .3 })
+
+// ── Chart bars ───────────────────────────────────────────────
+inView('#chart', () => {
+  document.querySelectorAll('.chart-bar-fill').forEach((bar, i) => {
+    const target = bar.dataset.w
+    bar.style.width = '0'
+    setTimeout(() => {
+      animate(bar, { width: target }, { duration:1.4, easing:[.16,1,.3,1] })
+    }, 200 + i * 110)
+  })
+}, { amount: .3 })
+
+// ── Steps stagger ────────────────────────────────────────────
+inView('#steps', () => {
+  animate('.step-item', { opacity:[0,1], x:[-24,0] },
+    { delay: stagger(.12), duration:.55, easing:ease })
+}, { amount: .2 })
+
+// ── Trust cards stagger ──────────────────────────────────────
+inView('#trust', () => {
+  animate('.trust-card', { opacity:[0,1], y:[24,0] },
+    { delay: stagger(.1), duration:.55, easing:ease })
+}, { amount: .2 })
+
+// ── WA card hover ────────────────────────────────────────────
+['#wac1','#wac2'].forEach(id => {
+  const el = document.querySelector(id)
+  if (!el) return
+  el.addEventListener('mouseenter', () => animate(el, { scale:1.025 }, { duration:.2, easing:easeSnap }))
+  el.addEventListener('mouseleave', () => animate(el, { scale:1 },     { duration:.2, easing:easeSnap }))
+})
+
+// ── Orb parallax ─────────────────────────────────────────────
+scroll(({ y }) => {
+  const orb = document.querySelector('.hero-orb-1')
+  if (orb) orb.style.transform = `translateX(-50%) translateY(${y.current * .12}px)`
+})
+</script>
+</body>
+</html>
