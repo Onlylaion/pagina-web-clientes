@@ -225,6 +225,44 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#818CF8 0%,#38
 .wa-btn{width:100%;padding:.72rem;border-radius:8px;background:var(--green);color:#fff;
   font-weight:700;font-size:.88rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.45rem}
 
+/* ADAPTA */
+.rubro-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.5rem;margin-bottom:3rem}
+.rubro-tag{display:flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:999px;
+  border:1px solid var(--border2);background:rgba(255,255,255,.03);font-size:.8rem;font-weight:600;color:var(--muted);
+  transition:border-color .25s,color .25s,background .25s}
+.rubro-tag:hover{border-color:rgba(129,140,248,.35);color:var(--accent);background:rgba(79,70,229,.07)}
+.rubro-tag svg{opacity:.6}
+.adapta-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-top:3.5rem}
+@media(max-width:768px){.adapta-cols{grid-template-columns:1fr}}
+.adapta-card{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:1.6rem}
+.adapta-card-n{width:36px;height:36px;border-radius:9px;background:rgba(79,70,229,.12);
+  display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:1rem}
+.adapta-card h4{font-weight:700;font-size:.9rem;margin-bottom:.4rem}
+.adapta-card p{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+/* PLANES */
+.planes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3.5rem}
+@media(max-width:640px){.planes-grid{grid-template-columns:1fr}}
+.plan-card{border-radius:20px;padding:2.2rem;border:1px solid var(--border)}
+.plan-card.featured{background:linear-gradient(135deg,rgba(79,70,229,.14),rgba(124,58,237,.1));border-color:rgba(79,70,229,.3);position:relative;overflow:hidden}
+.plan-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--indigo),var(--cyan))}
+.plan-badge{display:inline-block;background:rgba(79,70,229,.18);border:1px solid rgba(129,140,248,.25);
+  padding:.2rem .7rem;border-radius:999px;font-size:.65rem;font-weight:800;letter-spacing:1px;color:#a5b4fc;
+  text-transform:uppercase;margin-bottom:1.2rem}
+.plan-card h3{font-size:1.4rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.5rem}
+.plan-card .plan-desc{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.8rem}
+.plan-features{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+.plan-feat{display:flex;align-items:flex-start;gap:.65rem;font-size:.84rem;color:var(--muted);line-height:1.5}
+.plan-feat svg{flex-shrink:0;margin-top:.1rem;color:var(--accent)}
+.plan-feat strong{color:var(--text);font-weight:600}
+.plan-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:.85rem;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;
+  background:var(--green);color:#fff;transition:opacity .2s}
+.plan-cta:hover{opacity:.88}
+.plan-card:not(.featured) .plan-cta{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border2)}
+.plan-card:not(.featured) .plan-cta:hover{background:rgba(255,255,255,.1)}
+.plan-note{text-align:center;margin-top:1.2rem;font-size:.76rem;color:var(--dim)}
+
 /* FOOTER */
 footer{padding:2.5rem 6%;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 .foot-logo{font-size:1.1rem;font-weight:900}
@@ -578,6 +616,74 @@ footer p{font-size:.78rem;color:var(--dim)}
   </div>
 </section>
 
+<!-- ADAPTAMOS -->
+<section class="s">
+  <div class="s-inner">
+    <span class="eyebrow" id="ey-ada">No es un sistema genérico</span>
+    <h2 class="s-title" id="st-ada">Nos adaptamos a la forma<br/>en que trabaja tu negocio.</h2>
+    <p class="s-sub" id="ss-ada">No creemos en los sistemas donde tenés que cambiar tus procesos para adaptarte al software. Primero entendemos cómo trabaja tu empresa y qué necesita resolver. A partir de eso, construimos la solución.</p>
+
+    <div class="rubro-grid" id="rubros">
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+        Florerías
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Ferreterías
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Distribuidoras
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        Veterinarias
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Comercios
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2h1l.4 2M7 13h10l4-8H5.4M7 13L5.4 4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        Mercados
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Servicios a empresas
+      </span>
+      <span class="rubro-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Tu rubro también
+      </span>
+    </div>
+
+    <div class="adapta-cols" id="adapta-cols">
+      <div class="adapta-card">
+        <div class="adapta-card-n">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 4.93 19.07M4.93 4.93a10 10 0 0 1 14.14 14.14"/></svg>
+        </div>
+        <h4>Primero, entendemos tu negocio</h4>
+        <p>Antes de escribir una línea de código, entendemos cómo trabajás hoy, qué problemas tenés y qué quería resolver. El sistema se diseña desde ese punto.</p>
+      </div>
+      <div class="adapta-card">
+        <div class="adapta-card-n">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h4>Solo lo que realmente necesitás</h4>
+        <p>No te vendemos funciones que no vas a usar. Incorporamos únicamente lo que aporta valor real a tu operación diaria — ni más, ni menos.</p>
+      </div>
+      <div class="adapta-card">
+        <div class="adapta-card-n">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h4>Evoluciona con tu negocio</h4>
+        <p>Las necesidades cambian. El sistema también puede cambiar. Podemos agregar módulos, ajustar flujos y agregar funciones a medida que crecés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESO -->
 <section class="s">
   <div class="s-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
@@ -648,6 +754,68 @@ footer p{font-size:.78rem;color:var(--dim)}
         <p>Cualquier duda o ajuste, nos escribís por WhatsApp directamente a nosotros. No hay tickets ni sistema de soporte genérico.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section class="s">
+  <div class="s-inner">
+    <span class="eyebrow" id="ey-pla">Planes de soporte</span>
+    <h2 class="s-title" id="st-pla">Sin contratos de permanencia.<br/>Pagás por lo que usás.</h2>
+    <p class="s-sub" id="ss-pla">El desarrollo tiene un precio único y cerrado. Después podés contratar un plan de soporte y mejoras continuas — mensual o anual — y cancelar cuando quieras. Sin letra chica, sin penalidades.</p>
+    <div class="planes-grid" id="planes">
+
+      <div class="plan-card">
+        <h3>Plan Mensual</h3>
+        <p class="plan-desc">Ideal para empezar. Pagás mes a mes, sin compromiso. Si en algún momento decidís que no lo necesitás, cancelás y listo.</p>
+        <div class="plan-features">
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Soporte directo por WhatsApp</strong> — respondemos cuando surge algo</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Correcciones y ajustes</strong> sin costo adicional</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Actualizaciones de seguridad</strong> incluidas</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Cancelás cuando querés, <strong>sin penalidad</strong></span>
+          </div>
+        </div>
+        <a href="https://wa.me/541160284968?text=Hola!%20Me%20interesa%20el%20plan%20mensual%20de%20soporte" target="_blank" class="plan-cta">Consultar precio mensual</a>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-badge">Mejor valor</div>
+        <h3>Plan Anual</h3>
+        <p class="plan-desc">Para quienes ya saben que van a usar el sistema a largo plazo. Pagás un año y obtenés un mejor precio, más prioridad en las mejoras y todo lo del plan mensual.</p>
+        <div class="plan-features">
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Todo lo del plan mensual incluido</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Mejor precio</strong> que el mensual equivalente</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Prioridad en mejoras</strong> y nuevas funciones</span>
+          </div>
+          <div class="plan-feat">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Un módulo nuevo <strong>sin costo adicional</strong> al año</span>
+          </div>
+        </div>
+        <a href="https://wa.me/541160284968?text=Hola!%20Me%20interesa%20el%20plan%20anual%20de%20soporte" target="_blank" class="plan-cta">Consultar precio anual</a>
+      </div>
+
+    </div>
+    <p class="plan-note">Precios en pesos argentinos · El sistema siempre es tuyo, el plan de soporte es opcional</p>
   </div>
 </section>
 
@@ -768,6 +936,25 @@ inView('#wc1', () => {
   animate('#wc1', { opacity:[0,1], y:[20,0] }, { duration:.5, easing:ease })
   animate('#wc2', { opacity:[0,1], y:[20,0] }, { delay:.13, duration:.5, easing:ease })
 }, { margin:'0px 0px -40px 0px' })
+
+// Adaptamos section
+inView('#ey-ada', () => animate('#ey-ada', { opacity:[0,1], y:[10,0] }, { duration:.5, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#st-ada', () => animate('#st-ada', { opacity:[0,1], y:[24,0] }, { duration:.6, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#ss-ada', () => animate('#ss-ada', { opacity:[0,1], y:[16,0] }, { duration:.5, delay:.1, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#rubros', () => {
+  animate('.rubro-tag', { opacity:[0,1], scale:[.9,1] }, { delay: stagger(.05), duration:.35, easing:snap })
+}, { margin:'0px 0px -40px 0px' })
+inView('#adapta-cols', () => {
+  animate('.adapta-card', { opacity:[0,1], y:[20,0] }, { delay: stagger(.1), duration:.5, easing:ease })
+}, { margin:'0px 0px -40px 0px' })
+
+// Planes section
+inView('#ey-pla', () => animate('#ey-pla', { opacity:[0,1], y:[10,0] }, { duration:.5, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#st-pla', () => animate('#st-pla', { opacity:[0,1], y:[24,0] }, { duration:.6, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#ss-pla', () => animate('#ss-pla', { opacity:[0,1], y:[16,0] }, { duration:.5, delay:.1, easing:ease }), { margin:'0px 0px -40px 0px' })
+inView('#planes', () => {
+  animate('#planes .plan-card', { opacity:[0,1], y:[28,0] }, { delay: stagger(.14), duration:.6, easing:ease })
+}, { margin:'0px 0px -60px 0px' })
 
 // WA card hover with spring
 ;['#wc1','#wc2'].forEach(id => {
