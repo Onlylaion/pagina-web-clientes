@@ -318,6 +318,11 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#818CF8 0%,#38
 .plan-card:not(.featured) .plan-cta{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border2)}
 .plan-card:not(.featured) .plan-cta:hover{background:rgba(255,255,255,.1)}
 .plan-note{text-align:center;margin-top:1.2rem;font-size:.76rem;color:var(--dim)}
+.email-contact{display:inline-flex;align-items:center;gap:.6rem;margin-top:2rem;
+  color:var(--muted);font-size:.9rem;font-weight:500;text-decoration:none;
+  border:1px solid var(--border);padding:.7rem 1.4rem;border-radius:10px;
+  transition:border-color .2s,color .2s,background .2s}
+.email-contact:hover{border-color:rgba(129,140,248,.35);color:var(--accent);background:rgba(79,70,229,.06)}
 
 /* FOOTER */
 footer{padding:2.5rem 6%;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
@@ -1071,7 +1076,10 @@ footer p{font-size:.78rem;color:var(--dim)}
           Escribir por WhatsApp
         </div>
       </a>
-    </div>
+    <a href="mailto:Alfatechnologiesclients@gmail.com" class="email-contact" id="email-contact">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Alfatechnologiesclients@gmail.com
+    </a>
   </div>
 </section>
 
