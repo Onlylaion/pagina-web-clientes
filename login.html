@@ -509,72 +509,66 @@ select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.14
       : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'
   })
 
-  function showError(msg) {
-    errorMsg.textContent = msg
-    errorBox.classList.add('visible')
-  }
-  function hideError() { errorBox.classList.remove('visible') }
+  function showError(msg) { errorMsg.textContent = msg; errorBox.classList.add('visible') }
+  function hideError()    { errorBox.classList.remove('visible') }
+  function setLoading(on) { submitBtn.disabled = on; submitBtn.classList.toggle('loading', on) }
 
-  function setLoading(on) {
-    submitBtn.disabled = on
-    submitBtn.classList.toggle('loading', on)
+  async function doLogin(email, password, slug) {
+    const url = slug
+      ? `${AUTH_BASE}/login/${encodeURIComponent(slug)}`
+      : `${AUTH_BASE}/login`
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: email, password }),
+    })
+
+    if (res.status === 300) {
+      const data = await res.json()
+      tenantSelect.innerHTML = ''
+      data.tenants.forEach(s => {
+        const opt = document.createElement('option')
+        opt.value = s; opt.textContent = s
+        tenantSelect.appendChild(opt)
+      })
+      tenantWrap.classList.add('visible')
+      multiTenantMode = true
+      setLoading(false)
+      showError('Tu usuario existe en varios negocios. Elegí uno y volvé a intentar.')
+      return null
+    }
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      throw new Error(body.error || 'Correo o contraseña incorrectos')
+    }
+    return res.json()
   }
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault()
     hideError()
-
     const email    = document.getElementById('email').value.trim()
     const password = passInput.value
+    const slug     = multiTenantMode ? tenantSelect.value : null
 
-    if (!email || !password) { showError('Completá todos los campos.'); return }
+    if (!email || !password) { showError('Completá correo y contraseña'); return }
 
     setLoading(true)
     try {
-      if (!multiTenantMode) {
-        const res  = await fetch(`${AUTH_BASE}/auth/login`, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ email, password })
-        })
-        const data = await res.json()
-
-        if (res.ok) {
-          if (data.redirectUrl) { window.location.href = data.redirectUrl; return }
-          if (data.tenants && data.tenants.length > 1) {
-            multiTenantMode = true
-            tenantSelect.innerHTML = data.tenants.map(t =>
-              `<option value="${t.slug}">${t.name}</option>`
-            ).join('')
-            tenantWrap.classList.add('visible')
-            submitBtn.querySelector('.btn-label').textContent = 'Continuar'
-            setLoading(false)
-            return
-          }
-          if (data.tenants && data.tenants.length === 1) {
-            const slug = data.tenants[0].slug
-            const r2   = await fetch(`${AUTH_BASE}/auth/login`, {
-              method:'POST', headers:{'Content-Type':'application/json'},
-              body: JSON.stringify({ email, password, tenantSlug: slug })
-            })
-            const d2 = await r2.json()
-            if (r2.ok && d2.redirectUrl) { window.location.href = d2.redirectUrl; return }
-          }
-          showError(data.message || 'No se pudo iniciar sesión.')
-        } else {
-          showError(data.message || 'Credenciales incorrectas.')
-        }
-      } else {
-        const slug = tenantSelect.value
-        const res  = await fetch(`${AUTH_BASE}/auth/login`, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ email, password, tenantSlug: slug })
-        })
-        const data = await res.json()
-        if (res.ok && data.redirectUrl) { window.location.href = data.redirectUrl; return }
-        showError(data.message || 'No se pudo iniciar sesión.')
-      }
-    } catch {
-      showError('Error de conexión. Verificá tu internet e intentá de nuevo.')
+      const data = await doLogin(email, password, slug)
+      if (!data) return
+      const params = new URLSearchParams({
+        _token:    data.token,
+        _userId:   String(data.userId),
+        _username: data.username,
+        _fullName: data.fullName,
+        _role:     data.role,
+      })
+      window.location.href = `${data.tenantUrl}?${params.toString()}`
+    } catch (err) {
+      showError(err.message || 'No se pudo iniciar sesión')
     } finally {
       setLoading(false)
     }
