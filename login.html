@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Iniciar sesión · AlfaSoft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Raleway:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --orange:#F97316; --ember:#EA580C; --accent:#FB923C;
+  --amber:#F59E0B; --deep:#C2410C;
+  --bg:#060402; --surface:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.08); --text:#FFF6EF;
+  --muted:rgba(255,246,239,.5); --dim:rgba(255,246,239,.3);
+  --error:#F87171; --error-bg:rgba(248,113,113,.1);
+  --panel-w:500px;
+}
+
+html,body{height:100%;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+
+.wrap{display:flex;min-height:100vh}
+
+/* ─── Panel izquierdo ─── */
+.left{
+  flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:3.5rem;position:relative;overflow:hidden;
+  background:linear-gradient(-45deg,#060402,#1A0B04,#060402,#120600,#0A0300);
+  background-size:400% 400%;
+  animation:gradPulse 14s ease infinite;
+}
+
+/* dot grid */
+.left::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(249,115,22,.12) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+
+/* orbs */
+.orb{position:absolute;border-radius:50%;pointer-events:none}
+.orb1{top:-8%;right:-6%;width:450px;height:450px;
+  background:radial-gradient(circle,rgba(249,115,22,.28) 0%,transparent 65%);
+  animation:orbFloat 9s ease-in-out infinite}
+.orb2{bottom:-8%;left:-5%;width:360px;height:360px;
+  background:radial-gradient(circle,rgba(234,88,12,.2) 0%,transparent 65%);
+  animation:orbFloat2 11s ease-in-out infinite}
+.orb3{top:45%;right:12%;width:180px;height:180px;
+  background:radial-gradient(circle,rgba(253,186,116,.15) 0%,transparent 70%);
+  animation:orbFloat 7s ease-in-out infinite reverse;animation-delay:2s}
+
+/* scan line */
+.scan{
+  position:absolute;left:0;right:0;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(249,115,22,.55) 40%,rgba(251,146,60,.8) 50%,rgba(249,115,22,.55) 60%,transparent);
+  animation:scanLine 7s linear infinite;z-index:1;
+}
+
+/* ring */
+.ring{
+  position:absolute;top:30%;left:75%;width:120px;height:120px;
+  border:1px solid rgba(249,115,22,.18);border-radius:50%;
+  animation:spinSlow 22s linear infinite;pointer-events:none;
+}
+.ring::before{
+  content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:1px solid rgba(251,146,60,.12);border-radius:50%;
+}
+
+/* contenido izquierdo */
+.left-content{position:relative;z-index:2}
+
+/* ── Brand / Logo animado ── */
+.brand{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:2.5rem}
+
+/* Contenedor del logo "A" */
+.brand-logo-wrap{
+  position:relative;width:120px;height:120px;
+  display:flex;align-items:center;justify-content:center;
+  animation:logoFloat 6s ease-in-out infinite;
+}
+.bla-ring{position:absolute;border-radius:50%;border:1px solid}
+.bla-ring-1{width:96px;height:96px;border-color:rgba(249,115,22,.25);animation:blaPulse 3s ease-in-out infinite}
+.bla-ring-2{width:114px;height:114px;border-color:rgba(249,115,22,.1);animation:blaPulse 3s ease-in-out 1.2s infinite}
+
+.bla-frame{position:absolute;width:120px;height:120px;top:0;left:0;pointer-events:none}
+.bla-frame-cw{animation:haRotCW 22s linear infinite}
+.bla-frame-ccw{animation:haRotCCW 16s linear infinite}
+
+.bla-letter{
+  font-family:'Raleway',sans-serif;
+  font-size:72px;font-weight:900;line-height:1;letter-spacing:-4px;
+  background:linear-gradient(145deg,#FDBA74 0%,#F97316 40%,#EA580C 75%,#C2410C 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:haShimmer 4.5s linear infinite;
+  position:relative;z-index:2;user-select:none;
+  filter:drop-shadow(0 0 20px rgba(249,115,22,.5));
+}
+
+.bla-particle{position:absolute;border-radius:50%;pointer-events:none}
+.bla-p1{width:6px;height:6px;background:#F97316;box-shadow:0 0 8px 2px rgba(249,115,22,.7);animation:haOrbit1 4s linear infinite}
+.bla-p2{width:4px;height:4px;background:#FDBA74;box-shadow:0 0 6px 2px rgba(253,186,116,.6);animation:haOrbit2 6s linear infinite reverse}
+.bla-p3{width:5px;height:5px;background:#C2410C;box-shadow:0 0 7px 2px rgba(194,65,12,.5);animation:haOrbit3 5s linear infinite}
+
+@keyframes blaPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.04);opacity:1}}
+
+.brand-name{
+  font-family:'Raleway',sans-serif;
+  font-size:1.7rem;font-weight:900;letter-spacing:6px;
+  background:linear-gradient(90deg,#F97316,#FDBA74,#FB923C,#F97316);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:loginGradShift 4s linear infinite;margin-top:.75rem;
+}
+.brand-sub{color:rgba(255,246,239,.3);font-size:.63rem;letter-spacing:5px;margin-top:.2rem;text-transform:uppercase}
+
+/* mobile brand */
+.brand-mobile .brand-logo-wrap{
+  width:90px;height:90px;margin:0 auto;
+  animation:logoFloat 6s ease-in-out infinite;
+}
+.brand-mobile .bla-letter{font-size:54px}
+.brand-mobile .brand-name{
+  font-family:'Raleway',sans-serif;
+  font-size:1.4rem;letter-spacing:4px;margin-top:.4rem;text-align:center;
+  background:linear-gradient(90deg,#F97316,#EA580C,#F97316);
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:loginGradShift 4s linear infinite;
+}
+.brand-mobile .brand-sub{color:#6B4C35;letter-spacing:3px;text-align:center;display:block;margin-top:.2rem}
+
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes loginGradShift{0%{background-position:0% center}100%{background-position:300% center}}
+
+.tagline{margin-bottom:2.5rem;animation:fadeUp .8s ease both;animation-delay:.6s;opacity:0}
+.tagline p{color:rgba(255,246,239,.85);font-size:1.3rem;font-weight:700;line-height:1.5}
+.tagline .grad{
+  background:linear-gradient(90deg,#F97316,#FDBA74,#F59E0B);
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:gradPulse 4s linear infinite;
+}
+.cursor{
+  display:inline-block;width:2px;height:1.25rem;background:rgba(249,115,22,.75);
+  vertical-align:middle;margin-left:4px;animation:blink 1s step-end infinite;
+}
+
+.features{display:flex;flex-direction:column;gap:.875rem;max-width:400px}
+.feat{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1rem 1.25rem;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(8px);position:relative;overflow:hidden;
+  animation:fadeUp .7s ease both;opacity:0;
+  transition:background .2s,border-color .2s;
+}
+.feat:hover{background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.2)}
+.feat::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:4px 0 0 4px}
+.feat:nth-child(1)::before{background:rgba(249,115,22,.9)}
+.feat:nth-child(2)::before{background:rgba(234,88,12,.85)}
+.feat:nth-child(3)::before{background:rgba(245,158,11,.9)}
+.feat:nth-child(1){animation-delay:.8s}
+.feat:nth-child(2){animation-delay:.95s}
+.feat:nth-child(3){animation-delay:1.1s}
+
+.feat-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:rgba(249,115,22,.1);display:flex;align-items:center;justify-content:center;
+}
+.feat-icon svg{width:18px;height:18px;stroke:#FB923C;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat-title{font-weight:700;color:#FFF6EF;font-size:.875rem;margin-bottom:2px}
+.feat-desc{color:rgba(255,246,239,.45);font-size:.76rem;line-height:1.4}
+
+.left-footer{
+  margin-top:auto;padding-top:3rem;
+  color:rgba(255,246,239,.2);font-size:.72rem;
+  position:relative;z-index:2;
+}
+
+/* ─── Panel derecho ─── */
+.right{
+  flex:0 0 var(--panel-w);display:flex;flex-direction:column;
+  background:#FAFAF8;position:relative;
+}
+.right::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(249,115,22,.04) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+
+.right-inner{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:3rem 3.5rem;position:relative;z-index:1;
+}
+
+/* logo mobile */
+.brand-mobile{display:none;text-align:center;margin-bottom:2.5rem;animation:fadeUp .6s ease both}
+
+/* form area */
+.form-wrap{width:100%;max-width:400px}
+
+.form-title{font-size:1.7rem;font-weight:800;color:#1A0D05;margin-bottom:.5rem}
+.form-sub{color:#6B4C35;font-size:1rem;margin-bottom:2rem;line-height:1.5}
+
+.error-box{
+  display:none;align-items:center;gap:.6rem;padding:.75rem 1rem;
+  background:var(--error-bg);border:1px solid rgba(248,113,113,.25);
+  border-radius:10px;font-size:.85rem;color:var(--error);margin-bottom:1.25rem;
+}
+.error-box.visible{display:flex}
+.error-box svg{flex-shrink:0;width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.field label{font-size:.78rem;font-weight:600;color:#5C3D22;letter-spacing:.03em;text-transform:uppercase}
+
+.input-wrap{position:relative}
+.input-icon{position:absolute;left:.875rem;top:50%;transform:translateY(-50%);width:18px;height:18px;pointer-events:none}
+.input-icon svg{width:18px;height:18px;stroke:#B08060;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+input[type="email"],input[type="password"],input[type="text"]{
+  width:100%;padding:.78rem 1rem .78rem 2.75rem;
+  background:#FAF7F4;border:1.5px solid #E8D8CA;border-radius:10px;
+  color:#1A0D05;font-family:inherit;font-size:.95rem;
+  transition:border-color .2s,box-shadow .2s;outline:none;
+}
+input::placeholder{color:#B08060}
+input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.14);background:#fff}
+
+.pass-toggle{
+  position:absolute;right:.875rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;padding:4px;color:#B08060;
+  display:flex;align-items:center;transition:color .2s;
+}
+.pass-toggle:hover{color:#6B4C35}
+.pass-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* tenant selector */
+.tenant-wrap{display:none;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.tenant-wrap.visible{display:flex}
+.tenant-wrap label{font-size:.78rem;font-weight:600;color:#5C3D22;letter-spacing:.03em;text-transform:uppercase}
+select{
+  width:100%;padding:.78rem 1rem;background:#FAF7F4;border:1.5px solid #E8D8CA;
+  border-radius:10px;color:#1A0D05;font-family:inherit;font-size:.95rem;
+  cursor:pointer;outline:none;appearance:none;transition:border-color .2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F97316' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+}
+select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.14)}
+
+/* submit button */
+.btn{
+  width:100%;padding:1rem;border:none;border-radius:10px;cursor:pointer;
+  font-family:inherit;font-size:1.05rem;font-weight:700;color:#fff;
+  background:linear-gradient(90deg,#F97316,#EA580C,#F97316);
+  background-size:200% auto;
+  box-shadow:0 4px 20px rgba(249,115,22,.4);
+  transition:background-position .4s,box-shadow .3s,opacity .2s,transform .15s;
+  margin-top:.5rem;
+}
+.btn:hover:not(:disabled){
+  background-position:right center;
+  box-shadow:0 8px 32px rgba(249,115,22,.6);
+  transform:translateY(-1px);
+}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{
+  display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;
+}
+.btn.loading .btn-label{display:none}
+.btn.loading .spinner{display:inline-block}
+.btn.loading{display:flex;align-items:center;justify-content:center;gap:.5rem}
+
+.right-footer{
+  text-align:center;padding:1.5rem;border-top:1px solid #EFE8E0;
+  position:relative;z-index:1;
+}
+.right-footer p{font-size:.72rem;color:#B08060}
+.back-link{margin-top:.4rem}
+.back-link a{font-size:.8rem;color:var(--orange);text-decoration:none;font-weight:600}
+.back-link a:hover{text-decoration:underline}
+
+/* ─── Animaciones ─── */
+@keyframes gradPulse{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}25%{transform:translate(28px,-22px) scale(1.08)}50%{transform:translate(10px,18px) scale(.94)}75%{transform:translate(-22px,8px) scale(1.04)}100%{transform:translate(0,0) scale(1)}}
+@keyframes orbFloat2{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-30px,20px) scale(.92)}66%{transform:translate(24px,-18px) scale(1.06)}100%{transform:translate(0,0) scale(1)}}
+@keyframes scanLine{0%{transform:translateY(-5%);opacity:0}10%{opacity:.5}90%{opacity:.15}100%{transform:translateY(105%);opacity:0}}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* "A" orbit keyframes (shared with landing) */
+@keyframes haRotCW{to{transform:rotate(360deg)}}
+@keyframes haRotCCW{to{transform:rotate(-360deg)}}
+@keyframes haShimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes haOrbit1{from{transform:rotate(0deg) translateX(48px) rotate(0deg)}to{transform:rotate(360deg) translateX(48px) rotate(-360deg)}}
+@keyframes haOrbit2{from{transform:rotate(70deg) translateX(56px) rotate(-70deg)}to{transform:rotate(430deg) translateX(56px) rotate(-430deg)}}
+@keyframes haOrbit3{from{transform:rotate(200deg) translateX(42px) rotate(-200deg)}to{transform:rotate(560deg) translateX(42px) rotate(-560deg)}}
+
+/* ─── Responsive ─── */
+@media(max-width:768px){
+  .left{display:none}
+  .right{flex:1}
+  .brand-mobile{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ══════════ PANEL IZQUIERDO ══════════ -->
+  <div class="left">
+    <div class="scan"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="ring"></div>
+
+    <div class="left-content">
+      <!-- Brand -->
+      <div class="brand">
+        <!-- Logo A animado -->
+        <div class="brand-logo-wrap">
+          <div class="bla-ring bla-ring-1"></div>
+          <div class="bla-ring bla-ring-2"></div>
+
+          <svg class="bla-frame bla-frame-cw" viewBox="0 0 120 120" fill="none">
+            <polygon points="45,4 75,4 104,32 104,88 75,116 45,116 16,88 16,32"
+              stroke="rgba(249,115,22,.22)" stroke-width="1" stroke-dasharray="5 4"/>
+            <circle cx="45" cy="4"  r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="75" cy="4"  r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="104" cy="32" r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="104" cy="88" r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="75" cy="116" r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="45" cy="116" r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="16" cy="88" r="2.5" fill="rgba(249,115,22,.6)"/>
+            <circle cx="16" cy="32" r="2.5" fill="rgba(249,115,22,.6)"/>
+          </svg>
+
+          <svg class="bla-frame bla-frame-ccw" viewBox="0 0 120 120" fill="none">
+            <polygon points="60,8 112,60 60,112 8,60"
+              stroke="rgba(251,146,60,.12)" stroke-width="1"/>
+            <line x1="53" y1="8"  x2="67" y2="8"  stroke="rgba(251,146,60,.4)" stroke-width="1.5"/>
+            <line x1="112" y1="53" x2="112" y2="67" stroke="rgba(251,146,60,.4)" stroke-width="1.5"/>
+            <line x1="53" y1="112" x2="67" y2="112" stroke="rgba(251,146,60,.4)" stroke-width="1.5"/>
+            <line x1="8" y1="53"  x2="8" y2="67"  stroke="rgba(251,146,60,.4)" stroke-width="1.5"/>
+          </svg>
+
+          <div class="bla-letter">A</div>
+          <div class="bla-particle bla-p1"></div>
+          <div class="bla-particle bla-p2"></div>
+          <div class="bla-particle bla-p3"></div>
+        </div>
+
+        <div class="brand-name">ALFASOFT</div>
+        <div class="brand-sub">Technology</div>
+      </div>
+
+      <!-- Tagline -->
+      <div class="tagline">
+        <p>Gestioná tu negocio de forma</p>
+        <p><span class="grad">simple y eficiente</span><span class="cursor"></span></p>
+      </div>
+
+      <!-- Features -->
+      <div class="features">
+        <div class="feat">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <div class="feat-title">Reportes en tiempo real</div>
+            <div class="feat-desc">Ganancias, ventas y stock siempre actualizados</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div>
+            <div class="feat-title">Control de inventario</div>
+            <div class="feat-desc">Alertas automáticas cuando el stock baja del mínimo</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="feat-title">Cola de pedidos</div>
+            <div class="feat-desc">Organizá entregas por fecha con seguimiento de cobros</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-footer">AlfaSoft © 2026 · Todos los derechos reservados</div>
+  </div>
+
+  <!-- ══════════ PANEL DERECHO ══════════ -->
+  <div class="right">
+    <div class="right-inner">
+
+      <!-- Logo mobile -->
+      <div class="brand-mobile">
+        <div class="brand-logo-wrap">
+          <div class="bla-ring bla-ring-1"></div>
+          <div class="bla-ring bla-ring-2"></div>
+          <svg class="bla-frame bla-frame-cw" viewBox="0 0 90 90" fill="none">
+            <polygon points="34,3 56,3 78,24 78,66 56,87 34,87 12,66 12,24"
+              stroke="rgba(249,115,22,.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="bla-letter" style="font-size:54px">A</div>
+          <div class="bla-particle bla-p1"></div>
+        </div>
+        <div class="brand-name">ALFASOFT</div>
+        <div class="brand-sub">Technology</div>
+      </div>
+
+      <div class="form-wrap">
+        <div class="form-title">Bienvenido de vuelta</div>
+        <div class="form-sub">Ingresá tus credenciales para acceder al sistema</div>
+
+        <div class="error-box" id="errorBox">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="errorMsg"></span>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <div class="input-wrap">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <input id="email" name="email" type="email" placeholder="tu@correo.com"
+                autocomplete="email" required autofocus/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <div class="input-wrap">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <input id="password" name="password" type="password" placeholder="••••••••"
+                autocomplete="current-password" required/>
+              <button type="button" class="pass-toggle" id="passToggle" aria-label="Mostrar contraseña">
+                <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="tenant-wrap" id="tenantWrap">
+            <label for="tenantSelect">Negocio</label>
+            <select id="tenantSelect"></select>
+          </div>
+
+          <button type="submit" class="btn" id="submitBtn">
+            <span class="btn-label">Ingresar al sistema</span>
+            <div class="spinner"></div>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="right-footer">
+      <p>AlfaSoft © 2026 · Todos los derechos reservados</p>
+      <div class="back-link"><a href="/">← Volver al inicio</a></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+;(function () {
+  const AUTH_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:3001'
+    : 'https://auth.alfatechnologies.com.ar'
+
+  const form         = document.getElementById('loginForm')
+  const submitBtn    = document.getElementById('submitBtn')
+  const errorBox     = document.getElementById('errorBox')
+  const errorMsg     = document.getElementById('errorMsg')
+  const tenantWrap   = document.getElementById('tenantWrap')
+  const tenantSelect = document.getElementById('tenantSelect')
+  const passInput    = document.getElementById('password')
+  const passToggle   = document.getElementById('passToggle')
+
+  let multiTenantMode = false
+
+  // toggle contraseña
+  passToggle.addEventListener('click', () => {
+    const show = passInput.type === 'password'
+    passInput.type = show ? 'text' : 'password'
+    passToggle.querySelector('svg').innerHTML = show
+      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'
+  })
+
+  function showError(msg) {
+    errorMsg.textContent = msg
+    errorBox.classList.add('visible')
+  }
+  function hideError() { errorBox.classList.remove('visible') }
+
+  function setLoading(on) {
+    submitBtn.disabled = on
+    submitBtn.classList.toggle('loading', on)
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    hideError()
+
+    const email    = document.getElementById('email').value.trim()
+    const password = passInput.value
+
+    if (!email || !password) { showError('Completá todos los campos.'); return }
+
+    setLoading(true)
+    try {
+      if (!multiTenantMode) {
+        const res  = await fetch(`${AUTH_BASE}/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ email, password })
+        })
+        const data = await res.json()
+
+        if (res.ok) {
+          if (data.redirectUrl) { window.location.href = data.redirectUrl; return }
+          if (data.tenants && data.tenants.length > 1) {
+            multiTenantMode = true
+            tenantSelect.innerHTML = data.tenants.map(t =>
+              `<option value="${t.slug}">${t.name}</option>`
+            ).join('')
+            tenantWrap.classList.add('visible')
+            submitBtn.querySelector('.btn-label').textContent = 'Continuar'
+            setLoading(false)
+            return
+          }
+          if (data.tenants && data.tenants.length === 1) {
+            const slug = data.tenants[0].slug
+            const r2   = await fetch(`${AUTH_BASE}/auth/login`, {
+              method:'POST', headers:{'Content-Type':'application/json'},
+              body: JSON.stringify({ email, password, tenantSlug: slug })
+            })
+            const d2 = await r2.json()
+            if (r2.ok && d2.redirectUrl) { window.location.href = d2.redirectUrl; return }
+          }
+          showError(data.message || 'No se pudo iniciar sesión.')
+        } else {
+          showError(data.message || 'Credenciales incorrectas.')
+        }
+      } else {
+        const slug = tenantSelect.value
+        const res  = await fetch(`${AUTH_BASE}/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ email, password, tenantSlug: slug })
+        })
+        const data = await res.json()
+        if (res.ok && data.redirectUrl) { window.location.href = data.redirectUrl; return }
+        showError(data.message || 'No se pudo iniciar sesión.')
+      }
+    } catch {
+      showError('Error de conexión. Verificá tu internet e intentá de nuevo.')
+    } finally {
+      setLoading(false)
+    }
+  })
+})()
+</script>
+</body>
+</html>
