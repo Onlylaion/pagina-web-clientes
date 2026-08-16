@@ -35,10 +35,11 @@ nav{position:fixed;inset:0 0 auto;z-index:100;display:grid;grid-template-columns
 .logo em{font-style:normal;background:linear-gradient(90deg,#FDBA74,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 /* links centro */
-.nav-links{list-style:none;display:flex;align-items:center;gap:2rem;margin:0;padding:0}
+.nav-links{list-style:none;display:flex;align-items:center;gap:1.6rem;margin:0;padding:0}
 .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;
   transition:color .2s}
 .nav-links a:hover{color:#fff}
+.nav-links a.nav-precios{color:#FDBA74;font-weight:700}
 
 /* botón derecha */
 .nav-right{display:flex;align-items:center;gap:1rem;justify-self:end}
@@ -482,10 +483,36 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#FDBA74 0%,#F9
 .email-contact:hover{border-color:rgba(251,146,60,.35);color:var(--accent);background:rgba(249,115,22,.06)}
 
 /* FOOTER */
-footer{padding:2.5rem 6%;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer{padding:3rem 6% 2rem;border-top:1px solid var(--border)}
+.foot-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto auto;gap:3rem;align-items:start}
+@media(max-width:640px){.foot-inner{grid-template-columns:1fr;gap:2rem}}
 .foot-logo{font-size:1.1rem;font-weight:900}
 .foot-logo em{font-style:normal;background:linear-gradient(90deg,#FDBA74,#F97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-footer p{font-size:.78rem;color:var(--muted)}
+.foot-tagline{font-size:.78rem;color:var(--muted);margin-top:.4rem;line-height:1.6}
+.foot-copy{font-size:.72rem;color:var(--dim);margin-top:1.2rem}
+.foot-col h5{font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem}
+.foot-col ul{list-style:none}
+.foot-col ul li{margin-bottom:.5rem}
+.foot-col ul li a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-col ul li a:hover{color:var(--text)}
+.foot-divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+
+/* FLOATING ACTIONS */
+.fab-wrap{position:fixed;bottom:1.8rem;right:1.8rem;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;pointer-events:none}
+.fab-wa{pointer-events:all;width:56px;height:56px;border-radius:50%;background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:transform .2s,box-shadow .2s;text-decoration:none;
+  opacity:0;transform:translateY(16px);transition:opacity .3s,transform .3s,box-shadow .2s}
+.fab-wa.visible{opacity:1;transform:translateY(0)}
+.fab-wa:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(37,211,102,.6)}
+.fab-top{pointer-events:all;width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.07);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--muted);transition:background .2s,color .2s;
+  opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.fab-top.visible{opacity:1;transform:translateY(0)}
+.fab-top:hover{background:rgba(255,255,255,.12);color:var(--text)}
 
 @media(max-width:600px){
   .hero-ctas{flex-direction:column;align-items:stretch}
@@ -521,6 +548,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
   <ul class="nav-links" id="navLinks">
     <li><a href="#como-funciona">¿Cómo funciona?</a></li>
+    <li><a href="#precios" class="nav-precios">Precios</a></li>
     <li><a href="#contacto">Contacto</a></li>
     <li class="nav-login-mobile">
       <a href="/login.html" class="nav-login">Iniciar sesión</a>
@@ -581,7 +609,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Quiero organizar mi negocio
     </a>
-    <a href="#situaciones" class="btn-secondary">¿Te suena familiar? ↓</a>
+    <a href="#precios" class="btn-secondary">Ver planes y precios ↓</a>
   </div>
 </section>
 
@@ -1392,9 +1420,42 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 </section>
 
 <footer>
-  <div class="foot-logo">Alfa<em>Soft</em></div>
-  <p>Software a medida para pequeñas y medianas empresas · Argentina</p>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo">Alfa<em>Soft</em></div>
+      <p class="foot-tagline">Software a medida para pequeñas y medianas empresas.<br/>Argentina · 2026</p>
+      <p class="foot-copy">AlfaSoft © 2026 · Todos los derechos reservados</p>
+    </div>
+    <div class="foot-col">
+      <h5>Navegación</h5>
+      <ul>
+        <li><a href="#como-funciona">¿Cómo funciona?</a></li>
+        <li><a href="#situaciones">Situaciones</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="/login.html">Iniciar sesión</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Contacto</h5>
+      <ul>
+        <li><a href="https://wa.me/541160284968" target="_blank">WhatsApp — Marcos</a></li>
+        <li><a href="https://wa.me/541122875921" target="_blank">WhatsApp — Nicolás</a></li>
+        <li><a href="mailto:Alfatechnologiesclients@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
+
+<!-- FLOATING ACTIONS -->
+<div class="fab-wrap">
+  <a href="https://wa.me/541160284968?text=Hola!%20Vi%20su%20p%C3%A1gina%20y%20me%20interesa%20un%20sistema%20para%20mi%20negocio" target="_blank" class="fab-wa" id="fabWa" aria-label="Consultar por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <button class="fab-top" id="fabTop" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+</div>
 
 <script>
 ;(function(){
@@ -1406,7 +1467,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     burger.classList.toggle('open', open)
     burger.setAttribute('aria-expanded', open)
   })
-  // Cerrar al hacer click en un link del menú
   links.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){
       links.classList.remove('open')
@@ -1414,6 +1474,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       burger.setAttribute('aria-expanded', 'false')
     })
   })
+})()
+
+;(function(){
+  const fabWa  = document.getElementById('fabWa')
+  const fabTop = document.getElementById('fabTop')
+  var shown = false
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY
+    if (y > 400 && !shown) {
+      shown = true
+      if (fabWa)  fabWa.classList.add('visible')
+      if (fabTop) fabTop.classList.add('visible')
+    } else if (y <= 400 && shown) {
+      shown = false
+      if (fabWa)  fabWa.classList.remove('visible')
+      if (fabTop) fabTop.classList.remove('visible')
+    }
+  }, { passive: true })
 })()
 </script>
 
