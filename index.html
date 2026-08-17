@@ -128,85 +128,9 @@ h1.hero-h1 em{font-style:normal;background:linear-gradient(120deg,#F97316 0%,#EA
   .logo-hero{margin-bottom:.5rem}
   .hero-logo-img{width:clamp(260px,70vw,400px)}
 }
-.hero-a-outer{
-  position:relative;width:260px;height:260px;
-  display:flex;align-items:center;justify-content:center;
-  animation:haFloat 6s ease-in-out 1s infinite;
-}
-.hero-a-outer:hover .ha-letter{
-  filter:drop-shadow(0 0 40px rgba(249,115,22,1)) drop-shadow(0 0 80px rgba(234,88,12,.85));
-}
-.ha-ring{
-  position:absolute;border-radius:50%;
-  border:1px solid rgba(249,115,22,.25);
-  animation:haPulse 3s ease-in-out infinite;
-}
-.ha-r1{width:204px;height:204px;animation-delay:0s}
-.ha-r2{width:240px;height:240px;animation-delay:1.4s}
-.ha-frm{
-  position:absolute;top:0;left:0;width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-}
-.ha-cw{animation:haRotCW 20s linear infinite}
-.ha-ccw{animation:haRotCCW 14s linear infinite}
-.ha-p{position:absolute;border-radius:50%;top:50%;left:50%}
-.ha-p1{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:#F97316;box-shadow:0 0 8px #F97316;animation:haOrb1 6s linear infinite}
-.ha-p2{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:#FB923C;box-shadow:0 0 6px #FB923C;animation:haOrb2 9s linear infinite reverse}
-.ha-p3{width:4px;height:4px;margin:-2px 0 0 -2px;background:#FDBA74;box-shadow:0 0 5px #FDBA74;animation:haOrb3 7.5s linear infinite}
-.ha-p4{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:#F59E0B;box-shadow:0 0 6px #F59E0B;animation:haOrb4 11s linear infinite reverse}
-@keyframes haOrb1{from{transform:rotate(0deg) translateX(112px)}to{transform:rotate(360deg) translateX(112px)}}
-@keyframes haOrb2{from{transform:rotate(0deg) translateX(90px)}to{transform:rotate(360deg) translateX(90px)}}
-@keyframes haOrb3{from{transform:rotate(45deg) translateX(122px)}to{transform:rotate(405deg) translateX(122px)}}
-@keyframes haOrb4{from{transform:rotate(180deg) translateX(98px)}to{transform:rotate(540deg) translateX(98px)}}
-.ha-letter{
-  position:absolute;
-  font-family:'Raleway','Inter',sans-serif;
-  font-size:152px;font-weight:900;letter-spacing:-6px;line-height:1;
-  background:linear-gradient(180deg,#FDBA74 0%,#F97316 42%,#EA580C 75%,#C2410C 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 22px rgba(249,115,22,.7)) drop-shadow(0 0 55px rgba(234,88,12,.4));
-  animation:haShimmer 4s ease-in-out infinite;
-  user-select:none;
-}
-/* ── Compact A — CTA ── */
-.cta-a-wrap{
-  position:relative;width:96px;height:96px;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 2.5rem;
-  animation:haFloat 5s ease-in-out infinite;
-}
-.ca-ring{position:absolute;border-radius:50%;border:1px solid rgba(249,115,22,.3);animation:haPulse 3s ease-in-out infinite}
-.ca-r1{width:76px;height:76px}
-.ca-r2{width:90px;height:90px;animation-delay:1.2s}
-.ca-frm{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.ca-cw{animation:haRotCW 14s linear infinite}
-.ca-ccw{animation:haRotCCW 10s linear infinite}
-.ca-p{position:absolute;border-radius:50%;top:50%;left:50%}
-.ca-p1{width:4px;height:4px;margin:-2px 0 0 -2px;background:#F97316;box-shadow:0 0 5px #F97316;animation:caOrb1 5s linear infinite}
-.ca-p2{width:3px;height:3px;margin:-1.5px 0 0 -1.5px;background:#FB923C;box-shadow:0 0 4px #FB923C;animation:caOrb2 7s linear infinite reverse}
-.ca-p3{width:3px;height:3px;margin:-1.5px 0 0 -1.5px;background:#FDBA74;box-shadow:0 0 4px #FDBA74;animation:caOrb3 6s linear infinite}
-@keyframes caOrb1{from{transform:rotate(0deg) translateX(42px)}to{transform:rotate(360deg) translateX(42px)}}
-@keyframes caOrb2{from{transform:rotate(0deg) translateX(35px)}to{transform:rotate(360deg) translateX(35px)}}
-@keyframes caOrb3{from{transform:rotate(45deg) translateX(46px)}to{transform:rotate(405deg) translateX(46px)}}
-.ca-letter{
-  position:absolute;
-  font-family:'Raleway','Inter',sans-serif;
-  font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1;
-  background:linear-gradient(180deg,#FDBA74 0%,#F97316 45%,#EA580C 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 12px rgba(249,115,22,.7));
-  animation:haShimmer 4s ease-in-out infinite;
-  user-select:none;
-}
+.cta-logo-wrap{display:flex;justify-content:center;margin:0 auto 2.5rem}
+.cta-logo-img{width:140px;height:auto;filter:drop-shadow(0 4px 20px rgba(234,88,12,.18))}
 @keyframes logoFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes haFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes haPulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.75;transform:scale(1.05)}}
-@keyframes haShimmer{
-  0%,100%{filter:drop-shadow(0 0 22px rgba(249,115,22,.7)) drop-shadow(0 0 55px rgba(234,88,12,.4))}
-  50%{filter:drop-shadow(0 0 36px rgba(249,115,22,.95)) drop-shadow(0 0 82px rgba(234,88,12,.7))}
-}
-@keyframes haRotCW{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes haRotCCW{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 
 .btn-primary{display:flex;align-items:center;gap:.55rem;
   background:linear-gradient(90deg,var(--orange),var(--ember));color:#fff;
@@ -567,10 +491,7 @@ footer{padding:3rem 6% 2rem;border-top:1px solid var(--border)}
 @media(max-width:600px){
   .hero-ctas{flex-direction:column;align-items:stretch}
   .hero h1{letter-spacing:-2px}
-  .hero-a-outer{width:200px;height:200px}
-  .ha-letter{font-size:116px}
-  .ha-r1{width:158px;height:158px}
-  .ha-r2{width:185px;height:185px}
+
 }
 
 /* BROWSER SURFACES */
@@ -1586,33 +1507,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <!-- CTA -->
 <section class="cta-s" id="contacto">
   <div class="cta-inner">
-    <div class="cta-a-wrap" id="cta-a">
-      <div class="ca-ring ca-r1"></div>
-      <div class="ca-ring ca-r2"></div>
-      <div class="ca-frm ca-cw">
-        <svg viewBox="0 0 96 96" width="96" height="96" aria-hidden="true">
-          <polygon points="48,4 76,18 90,48 76,78 48,90 20,78 6,48 20,18"
-            fill="none" stroke="rgba(249,115,22,.5)" stroke-width="1.2"/>
-          <circle cx="48" cy="4"  r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="76" cy="18" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="90" cy="48" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="76" cy="78" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="48" cy="90" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="20" cy="78" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="6"  cy="48" r="2.5" fill="#F97316" opacity=".9"/>
-          <circle cx="20" cy="18" r="2.5" fill="#F97316" opacity=".9"/>
-        </svg>
-      </div>
-      <div class="ca-frm ca-ccw">
-        <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
-          <polygon points="36,4 68,36 36,68 4,36"
-            fill="none" stroke="rgba(234,88,12,.4)" stroke-width="1"/>
-        </svg>
-      </div>
-      <div class="ca-p ca-p1"></div>
-      <div class="ca-p ca-p2"></div>
-      <div class="ca-p ca-p3"></div>
-      <div class="ca-letter">A</div>
+    <div class="cta-logo-wrap" id="cta-a">
+      <img src="logo-alfasoft.png" alt="AlfaSoft" class="cta-logo-img"/>
     </div>
     <h2 class="cta-h" id="ctah">¿Tiene sentido para<br/>tu negocio?</h2>
     <p class="cta-sub" id="ctasub">Contanos en qué rubro estás, qué problema querés resolver y cuánto tiempo le dedicás hoy a tareas que podrían automatizarse. Vemos si podemos ayudarte.</p>
